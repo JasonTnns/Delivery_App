@@ -17,16 +17,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.deliveryapp.HomeViewModel
 import com.example.deliveryapp.Restaurant
+import org.koin.android.annotation.KoinViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun HomeScreen(onRestaurantClick: (Int) -> Unit) {
-    val restaurants = listOf(
-        Restaurant(1, "Burger Zone", "Burgers", ""),
-        Restaurant(2, "123 Pasta", "Pasta", ""),
-        Restaurant(3, "Amar", "Lebanese", ""),
-        Restaurant(4, "Sushi Star", "Japanese", "")
-    )
+fun HomeScreen(onRestaurantClick: (Int) -> Unit,
+               viewModel: HomeViewModel = koinViewModel()
+) {
+    val restaurants = viewModel.restaurants
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         contentPadding = PaddingValues(16.dp),
