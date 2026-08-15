@@ -12,19 +12,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.deliveryapp.MenuItem
+import com.example.deliveryapp.MenuViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun MenuScreen(restaurantId: String?) {
-    val allMenuItems = listOf(
-        MenuItem(1, 1, "Classic Burger", 8.50, ""),
-        MenuItem(2, 1, "Cheese Fries", 4.00, ""),
-        MenuItem(3, 2, "Spaghetti Carbonara", 10.00, ""),
-        MenuItem(4, 3, "Chicken Tawook", 9.00, ""),
-        MenuItem(5, 4, "California roll", 7.50, "")
-        )
-
-    val filteredItems = allMenuItems.filter { it.restaurantId.toString() == restaurantId }
+fun MenuScreen(
+    restaurantId: String?,
+    viewModel: MenuViewModel = koinViewModel()
+) {
+    val filteredItems = viewModel.getItemsForRestaurant(restaurantId)
 
     LazyColumn(
         contentPadding = PaddingValues(16.dp),
