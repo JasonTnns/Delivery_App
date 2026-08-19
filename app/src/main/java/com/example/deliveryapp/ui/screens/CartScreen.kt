@@ -27,7 +27,7 @@ fun CartScreen(cartManager: CartManager = koinInject()) {
                 Card(modifier = Modifier.fillMaxWidth()) {
                     Column(modifier = Modifier.padding(12.dp)) {
                         Text(text = "${cartItem.menuItem.name} x${cartItem.quantity}")
-                        Text(text = "${cartItem.menuItem.price} * cartItem.quantity")
+                        Text(text = "${cartItem.menuItem.price} * ${cartItem.quantity}")
                     }
                 }
             }
