@@ -18,7 +18,6 @@ import com.example.deliveryapp.CartManager
 import com.example.deliveryapp.MenuViewModel
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
-
 @Composable
 fun MenuScreen(
     restaurantId: String?,
@@ -28,21 +27,30 @@ fun MenuScreen(
 ) {
     val filteredItems = viewModel.getItemsForRestaurant(restaurantId)
 
-    LazyColumn(
-        contentPadding = PaddingValues(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        items(filteredItems) { item ->
-            Card(modifier = Modifier.fillMaxWidth()
-                .clickable{ cartManager.addItem(item)}) {
-                Column(modifier = Modifier.padding(12.dp)) {
-                    Text(text = item.name)
-                    Text(text = "$${item.price}")
+    Column {
+        LazyColumn(
+            modifier = Modifier.weight(1f),
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            items(filteredItems) { item ->
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { cartManager.addItem(item) }
+                ) {
+                    Column(modifier = Modifier.padding(12.dp)) {
+                        Text(text = item.name)
+                        Text(text = "$${item.price}")
+                    }
                 }
             }
         }
-    }
-    Button(onClick = onCartClick, modifier = Modifier.fillMaxWidth().padding(16.dp)){
-        Text("View Cart")
+        Button(
+            onClick = onCartClick,
+            modifier = Modifier.fillMaxWidth().padding(16.dp)
+        ) {
+            Text("View Cart")
+        }
     }
 }
